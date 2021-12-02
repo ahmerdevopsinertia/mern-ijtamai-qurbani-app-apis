@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
 const cors = require('cors');
+const mountAll = require('./routes/mountAll');
 
 // Load env vars
 dotenv.config({ path: './config/.env_development' });
@@ -20,6 +21,14 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(cors());
+
+// route files
+const healthCheck = require('./routes/healthCheck');
+const helloWorld = require('./routes/helloWorld');
+
+// // Mount all routes
+app.use('/api/v1/health/check', healthCheck);
+app.use('/api/v1/hello/world', helloWorld);
 
 const PORT = process.env.PORT || 5001;
 
