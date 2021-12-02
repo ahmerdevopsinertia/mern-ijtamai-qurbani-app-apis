@@ -1,0 +1,23 @@
+{
+  "name": "mern-ijtamai-qurbani-app-apis",
+  "version": "1.0.0",
+  "description": "Mern Ijtamai Qurbani App APIs",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmerdevopsinertia/mern-ijtamai-qurbani-app-apis.git"
+  },
+  "author": "Ahmer Saeed, Senior Software Engineer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahmerdevopsinertia/mern-ijtamai-qurbani-app-apis/issues"
+  },
+  "homepage": "https://github.com/ahmerdevopsinertia/mern-ijtamai-qurbani-app-apis#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "npm": "^8.1.4"
+  }
+}
