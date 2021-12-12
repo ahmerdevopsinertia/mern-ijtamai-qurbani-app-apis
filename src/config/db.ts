@@ -10,7 +10,6 @@ const dbConnection = async () => {
     if (process.env.NODE_ENV == 'qa') {
         ormConfig = ormConfigQa
     }
-    console.log(ormConfig);
     await createConnection(ormConfig).catch(error => console.log(`DATABASE failed to connect ${error.message}`))
 };
 
