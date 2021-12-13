@@ -1,3 +1,10 @@
+.idea/
+.vscode/
+node_modules/
+build/
+tmp/
+temp/
+
 # Logs
 logs
 *.log
@@ -102,3 +109,6 @@ dist
 
 # TernJS port file
 .tern-port
+.env_development
+.env_production
+.env_qa
