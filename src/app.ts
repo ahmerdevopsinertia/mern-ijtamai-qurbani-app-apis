@@ -1,17 +1,16 @@
 import config from "./config/config";
-
 import express from 'express';
-
 import morgan from 'morgan';
-// import colors from 'colors';
+import colors from 'colors';
 import cors from 'cors';
-
 import routes from './routes';
+import errorHandler from './middleware/error';
 
 // Initiating env variables.
 config();
 
 import dbConnection from './config/db';
+
 
 // Initiate the Database Connection
 dbConnection();
@@ -30,7 +29,11 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
+// Handling CORS
 app.use(cors());
+
+// Handling errors
+app.use(errorHandler);
 
 const PORT = process.env.PORT;
 
@@ -38,7 +41,7 @@ app.listen(
     PORT,
     () => {
         console.log(
-            `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
+            colors.yellow(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
         )
     }
 );

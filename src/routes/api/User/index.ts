@@ -1,8 +1,5 @@
-import { getRepository } from "typeorm";
-import { User } from "../../../entity/User";
-
 import express from 'express';
-
+import { createUser, getUser } from '../../../controller/user';
 const router = express.Router({ mergeParams: true });
 
 // const advancedResults = require('../middleware/advancedResults');
@@ -13,18 +10,7 @@ const router = express.Router({ mergeParams: true });
 
 router
     .route('/user')
-    .post(async (req, res) => {
-        const userRepo = getRepository(User);
-        const userRecord = userRepo.create({
-            firstName: "John",
-            lastName: "Doe",
-            age: 22,
-        });
-        await userRepo.save(userRecord).catch((err) => {
-            console.log("Error: ", err);
-        });
-        console.log("New User Saved", userRecord);
-        res.end('New User Saved');
-    });
+    .post(createUser)
+    .get(getUser)
 
 export default router;
