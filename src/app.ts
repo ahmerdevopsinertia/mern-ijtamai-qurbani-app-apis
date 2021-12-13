@@ -1,7 +1,7 @@
 import config from "./config/config";
 import express from 'express';
 import morgan from 'morgan';
-// import colors from 'colors';
+import colors from 'colors';
 import cors from 'cors';
 import routes from './routes';
 import errorHandler from './middleware/error';
@@ -41,7 +41,7 @@ app.listen(
     PORT,
     () => {
         console.log(
-            `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
+            colors.yellow(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
         )
     }
 );

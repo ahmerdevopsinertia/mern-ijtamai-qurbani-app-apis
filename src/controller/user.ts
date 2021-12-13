@@ -4,7 +4,7 @@ import { getRepository } from 'typeorm';
 import { User } from '../entity/User';
 
 const getUser = asyncHandler(async (req: any, res: any, next: any) => {
-  res.end('getUser');
+    res.end('getUser');
 });
 
 const createUser = asyncHandler(async (req: any, res: any, next: any) => {
