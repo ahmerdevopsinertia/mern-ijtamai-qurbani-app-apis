@@ -21,6 +21,7 @@ import {
 	Entity, PrimaryGeneratedColumn, Column, BaseEntity,
 	CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, OneToMany
 } from 'typeorm';
+import { Profiles } from './Profiles';
 
 export enum TeamType {
 	CIRCLE = 'circle',
@@ -55,6 +56,9 @@ export class Areas extends BaseEntity {
 
 	@OneToMany(type => Areas, area => area.parent)
 		children: Areas[];
+	
+	@OneToMany(() => Profiles, profile => profile.area)
+		profile: Profiles[];
 
 	@CreateDateColumn()
 		createdDate: Date;

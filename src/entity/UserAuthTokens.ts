@@ -1,13 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, ManyToOne } from 'typeorm';
+import { Users } from './Users';
 
 @Entity()
 export class UserAuthTokens extends BaseEntity {
 
 	@PrimaryGeneratedColumn('uuid')
 		id: number;
-
-	@Column({ type: 'varchar', length: 100, nullable: true })
-		userId: string;
+	
+	@ManyToOne(() => Users, user => user.authTokens)
+		user: Users;
 
 	@Column({ type: 'varchar', length: 100, unique: true })
 		token: string;

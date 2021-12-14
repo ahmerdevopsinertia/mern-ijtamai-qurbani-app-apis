@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany, OneToOne, JoinColumn } from 'typeorm';
+import { UserRoles } from './UserRoles';
+import { UserAuthTokens } from './UserAuthTokens';
 
 // First Super Admin will create
 // Users than utilize these Users 
@@ -12,10 +14,11 @@ export class Users extends BaseEntity {
 		id: number;
 
 	@Column('varchar', { length: 100 })
-		userRoleId: string; // F.Key
-
-	@Column('varchar', { length: 100 })
-		locationId: string; // F.Key
+		userRoleId: string;
+	
+	@OneToOne(() => UserRoles)
+	@JoinColumn()
+		role: UserRoles;
 
 	@Column({
 		type: 'varchar', length: 25
@@ -49,4 +52,7 @@ export class Users extends BaseEntity {
 
 	@DeleteDateColumn()
 		deletedDate: Date;
+	
+	@OneToMany(() => UserAuthTokens, token => token.user)
+		authTokens: UserAuthTokens[];
 }

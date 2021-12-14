@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from 'typeorm';
+import { BookingDetails } from './BookingDetails';
 
 // Apply Filter using the name or mobile number while adding share holders on the booking
 // Think of uniqueness issue
@@ -57,4 +58,7 @@ export class ShareHolders extends BaseEntity {
 
 	@DeleteDateColumn()
 		deletedDate: Date;
+
+	@OneToMany(() => BookingDetails, booking => booking.shareHolders)
+		shareHolders: BookingDetails[];
 }

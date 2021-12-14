@@ -1,15 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
 
-export enum UserRole {
-	EDITOR = 'editor', // committee member will be the editor
-	VIEWER = 'viewer',
-}
-
 @Entity()
-export class Users extends BaseEntity {
+export class UserRoles extends BaseEntity {
 
 	@PrimaryGeneratedColumn('uuid')
 		id: number;
+	
+	@Column({
+		type: 'varchar', length: 25
+	})
+		name: string;
 
 	@Column('simple-array')
 		permissionCodes: string[]; // put from permission table
@@ -17,3 +17,6 @@ export class Users extends BaseEntity {
 	@Column('simple-array')
 		permissionDisplayNames: string[]; // put from permission table
 }
+
+// EDITOR = 'editor', // committee member will be the editor
+// VIEWER = 'viewer',

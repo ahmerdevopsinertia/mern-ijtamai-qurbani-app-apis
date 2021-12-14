@@ -1,13 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, ManyToOne } from 'typeorm';
+import { AdminUsers } from './AdminUsers';
 
 @Entity()
 export class AdminAuthTokens extends BaseEntity {
 
 	@PrimaryGeneratedColumn('uuid')
 		id: number;
-
-	@Column({ type: 'varchar', length: 100, nullable: true })
-		adminUserId: string;
+	
+	@ManyToOne(() => AdminUsers, user => user.authTokens)
+		adminUser: AdminUsers;
 
 	@Column({ type: 'varchar', length: 100, unique: true })
 		token: string;

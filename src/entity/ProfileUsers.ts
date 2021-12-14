@@ -1,5 +1,6 @@
 
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from 'typeorm';
+import { Profiles } from './Profiles';
 
 // This table will store 
 // Users who are Committee Members 
@@ -10,7 +11,7 @@ export class ProfileUsers extends BaseEntity {
 
 	@PrimaryGeneratedColumn('uuid')
 		id: number;
-
-	@Column('varchar', { length: 100 })
-		userId: string; // F.Key
+	
+	@ManyToOne(() => Profiles, profile => profile.profileUser)
+		profiles: Profiles;
 }

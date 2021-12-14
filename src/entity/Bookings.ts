@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, DeleteDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { BookingDetails } from './BookingDetails';
 
 export enum BookingCategory {
 	ASAAN = 'asaan',
@@ -65,4 +66,7 @@ export class Bookings extends BaseEntity {
 
 	@DeleteDateColumn()
 		deletedDate: Date;
+	
+	@OneToMany(() => BookingDetails, booking => booking.bookings)
+		bookingDetails: BookingDetails[];
 }

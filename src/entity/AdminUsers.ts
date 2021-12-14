@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from 'typeorm';
+import { AdminAuthTokens } from './AdminAuthTokens';
+import { Profiles } from './Profiles';
 
 @Entity()
 export class AdminUsers extends BaseEntity {
@@ -38,4 +40,10 @@ export class AdminUsers extends BaseEntity {
 
 	@DeleteDateColumn()
 		deletedDate: Date;
+	
+	@OneToMany(() => AdminAuthTokens, token => token.adminUser)
+		authTokens: AdminAuthTokens[];
+
+	@OneToMany(() => Profiles, profile => profile.adminUser)
+		profile: Profiles[];
 }

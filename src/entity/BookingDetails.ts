@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from 'typeorm';
+import { Bookings } from './Bookings';
+import { ShareHolders } from './ShareHolders';
 
 // This entity will store share holder 
 // info for all categories such as Cow, Bakra etc
@@ -21,11 +23,11 @@ export class BookingDetails extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')
 		id: number;
 
-	@Column({ type: 'varchar', length: 100 })
-		bookingId: string; // F.key
+	@ManyToOne(() => Bookings, booking => booking.bookingDetails)
+		bookings: Bookings;
 
-	@Column({ type: 'varchar', length: 100 })
-		shareHolderId: string; // F.key
+	@ManyToOne(() => ShareHolders, share => share.shareHolders)
+		shareHolders: ShareHolders;
 
 	@Column({ type: 'varchar', length: 25, nullable: true })
 		referenceOfName: string; // who referred the share holder put the name here

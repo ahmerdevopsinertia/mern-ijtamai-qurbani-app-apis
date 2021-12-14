@@ -1,10 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
 
-export enum UserRole {
-	EDITOR = 'editor', // committee member will be the editor
-	VIEWER = 'viewer',
-}
-
 @Entity()
 export class Permissions extends BaseEntity {
 

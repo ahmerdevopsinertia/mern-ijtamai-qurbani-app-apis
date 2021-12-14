@@ -1,4 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, DeleteDateColumn, UpdateDateColumn, OneToMany, ManyToOne } from 'typeorm';
+import { AdminUsers } from './AdminUsers';
+import { Areas } from './Areas';
+import { ProfileUsers } from './ProfileUsers';
 
 // This table will help in formatting Qurbani receipts as well
 
@@ -8,11 +11,11 @@ export class Profiles extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')
 		id: number;
 
-	@Column({ type: 'varchar', length: 100, nullable: true })
-		adminUserId: string; // Admin User id who created this profile use for f.key purpose
-
-	@Column({ type: 'varchar', length: 100, nullable: true })
-		areasId: string; // Area informations
+	@ManyToOne(() => AdminUsers, adminUser => adminUser.profile)
+		adminUser: AdminUsers;
+	
+	@ManyToOne(() => Areas, area => area.profile)
+		area: Areas;
 
 	@Column({
 		type: 'string',
@@ -186,4 +189,7 @@ export class Profiles extends BaseEntity {
 
 	@DeleteDateColumn()
 		deletedDate: Date;
+	
+	@OneToMany(() => ProfileUsers, user => user.profiles)
+		profileUser: ProfileUsers[];
 }
